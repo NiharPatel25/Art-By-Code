@@ -1,0 +1,28 @@
+'''cloning Roger Antonsens Rotating triangles'''
+
+def setup():
+    size(600,600)
+    background(0)
+    stroke(255)
+    noFill()
+    
+t = 0 # time variable
+NUM_TRIS = 90
+
+def draw():
+    global t
+    background(0)
+    translate(width/2,height/2)
+    for i in range(NUM_TRIS):
+        rotate(radians(360/NUM_TRIS))
+        pushMatrix() #save this orientation
+        translate(200,0)
+        rotate(radians(t+2*i*360/NUM_TRIS))
+        tri(100)
+        popMatrix()#returns to saved oriantation
+    t+=0.5
+    
+def tri(length):
+    triangle(0,-length,
+             -length*sqrt(3)/2,length/2,
+             length*sqrt(3)/2,length/2)
