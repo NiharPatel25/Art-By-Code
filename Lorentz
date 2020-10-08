@@ -1,0 +1,56 @@
+x = 0.01
+x = float(x)
+y = 0.0
+y = float(y)
+z = 0.0
+z = float(z)
+
+rot = 0
+
+a = 10.0
+b = 28.0
+c = 8.0/3.0
+
+def setup():
+    global points
+    size(800, 800, P3D)
+    colorMode(HSB)
+    points = list()
+    
+def draw():
+    global x,y,z,a,b,c, points, rot
+    background(0)
+    
+    dt = 0.01
+    dx = (a * (y - x)) * dt
+    dy = (x * (b -z) - y ) * dt
+    dz = (x * y - c * z)* dt
+    
+    x = x + dx
+    y = y + dy
+    z = z + dz
+    
+    points.append(PVector(x,y,z))
+    
+    translate(width/2, height/2)
+    scale(5)
+    stroke(255)
+    noFill()
+    ##point(x,y,z)
+    hu = 0
+    
+    rot += 0.03
+    rotateY(rot)
+    
+    push()
+    beginShape()
+    for i in range(len(points)):
+        
+        stroke(hu, 255, 255)
+        v = points[i]
+        vertex(v.x, v.y, v.z)
+        hu += 0.1
+        if(hu>255):
+            hu = 0
+    endShape()
+    pop()
