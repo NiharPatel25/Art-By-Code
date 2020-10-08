@@ -1,0 +1,28 @@
+TOTAL_DEGREES = 360
+radius = 0
+
+def setup():
+    global displayWidth, displayHeight
+    size(int(displayWidth*0.75), int(displayHeight*0.75))
+    background(0)
+    noFill
+    
+    
+    
+def draw():
+     # transform function. shifts the xy coordinates... parameter 1 if shifting x coordinate, 2nd parameter is shifting y
+    translate(-width,0)
+    beginShape()
+    x = frameCount
+    translate(x,0)
+    r = random(0,255)
+    g = random(0,255)
+    b = random(0,255)
+    
+    stroke(r,g,b,79)
+    
+    vertex(0,height)
+    vertex(0,height)
+    vertex(width,0)
+    vertex(width,0)
+    endShape(CLOSE)
