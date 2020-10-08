@@ -1,0 +1,67 @@
+
+class balls():
+    def __init__(self):
+        self.xpos = int(random(50,750))
+        self.ypos = -50
+        self.r = random(255)
+        self.g = random(255)
+        self.b = random(255)
+        
+        self.direction = -1
+        self.height_reached = 50
+        
+    def display(self):
+        self.position()
+        translate(self.xpos, self.ypos)
+        fill(self.r, self.g, self.b)
+        noStroke()
+        sphere(50)
+        
+    def position(self):
+        if self.direction == -1:
+            self.ypos = self.ypos + 9.8*((frameRate/100)*(frameRate/100))
+            
+            if self.ypos < 750: 
+                self.direction = -1
+            elif self.ypos>= 750:
+                self.ypos = 750
+                self.direction = 1
+               
+        elif self.direction == 1:
+            self.ypos = self.ypos - 9.8*((frameRate/100)*(frameRate/100))
+            
+            if self.ypos < self.height_reached: 
+                self.direction = -1
+                self.height_reached = self.height_reached + 50
+                
+            elif self.ypos >= self.height_reached:
+                self.direction = 1
+        
+
+total = 5
+all_balls = list()
+
+for i in range(total):
+    v = balls()
+    all_balls.append(v)
+    
+
+def setup():
+    size(800,800,P3D)
+    frameRate(100)
+    
+def draw():
+    global total
+    lights()
+    background(150)
+    
+    for i in range(total):
+        pushMatrix()
+        all_balls[i].display()
+        popMatrix()
+    
+    print(len(all_balls))
+    
+    
+    
+    
